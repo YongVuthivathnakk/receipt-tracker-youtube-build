@@ -23,17 +23,12 @@ function PDFDropzone() {
 
 
 
-  /*
-  
-  !!! Feature cannot be use due to the problem with integration between Stripe and Schematic !!!
-  ========================================
   const {
     value: isFeaturedEnabled,
-    featureUsageExeeded,
+    featureUsageExceeded,
     featureAllocation,
   } = useSchematicEntitlement("scans");
-  ========================================
-  */
+
   
 
 
@@ -125,9 +120,9 @@ function PDFDropzone() {
 
   }, [user, handleUpload])
 
-  const isFeaturedEnabled = true;
+
   const isUserSignedin = !!user;
-  const canUpload = isUserSignedin;   // should be isUserSignedin && isFeaturedEnabled
+  const canUpload = isUserSignedin && isFeaturedEnabled;
 
   //  Handle file input change 
   const handleFileInpuChange = useCallback(
@@ -143,8 +138,7 @@ function PDFDropzone() {
   const triggerFileInput = useCallback(() => {
     fileInputRef.current?.click();
   }, []);
-
-
+  
   return (
     <DndContext sensors={sensors} >
       <div className="w-full max-w-md mx-auto ">
@@ -196,8 +190,8 @@ function PDFDropzone() {
           )}
         </div>
 
-        {/* <div className="mt-4">
-            {featuresUsageExceeded && (
+        <div className="mt-4">
+            {featureUsageExceeded && (
               <div className="flex items-center p-3 bg-red border border-red-200 rounded-md text-red-200">
                 <AlertCircle className="h-5 w-5 mr-2 flex-shrink-0" />
                 <span>
@@ -206,7 +200,7 @@ function PDFDropzone() {
                 </span>
               </div>
             )}
-        </div> */}
+        </div>
 
         {uploadedFiles.length > 0 && (
           <div className="mt-4">
