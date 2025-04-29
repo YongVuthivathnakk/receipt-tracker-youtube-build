@@ -47,8 +47,6 @@ export default function ConvexClientProvider({
   children: ReactNode;
 }) {
 
-
-
   return (
     <ConvexProviderWithClerk client={convex} useAuth={useAuth}>
       <SchematicProvider publishableKey={process.env.NEXT_PUBLIC_SCHEMATIC_KEY!}>
