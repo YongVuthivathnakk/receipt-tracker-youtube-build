@@ -8,11 +8,13 @@ import {
 import { createServer } from "@inngest/agent-kit/server";
 import { inngest } from "./client";
 import Events from "./agent/constant";
+import { databaseAgent } from "./agent/databaseAgent";
+import { receiptScanningAgent } from "./agent/receiptScanningAgent";
 
 
 const agentNetwork = createNetwork({
     name: "Agent Team",
-    agents: [databseAgent, receiptScanningAgent],
+    agents: [databaseAgent, receiptScanningAgent],
     defaultModel: anthropic({
         model: "claude-3-5-sonnet-latest",
         defaultParameters: {
@@ -30,7 +32,7 @@ const agentNetwork = createNetwork({
 });
 
 export const server = createServer({
-    agents: [databaseAgent, receiptScanningAgent],
+    agents: [databaseAgent, receiptScanningAgent],  
     networks: [agentNetwork],
 })
 
